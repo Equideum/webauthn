@@ -62,10 +62,13 @@ public class BeginMakeCredential extends HttpServlet {
       throws ServletException, IOException {
     User user = userService.getCurrentUser();
     // String rpId = (request.isSecure() ? "https://" : "http://") + request.getHeader("Host");
-    String rpId = Iterables.get(Splitter.on(':').split(request.getHeader("Host")), 0);
-    String rpName = getServletContext().getInitParameter("name");
-    rpName = (rpName == null ? "" : rpName);
+   // String rpId = Iterables.get(Splitter.on(':').split(request.getHeader("Host")), 0);
+    //String rpName = getServletContext().getInitParameter("name");
+    //rpName = (rpName == null ? "" : rpName);
 
+    String rpName  = "webauthn-demo";
+    String rpId = "poc-node-1.fhirblocks.io";
+    
     PublicKeyCredentialCreationOptions options =
         new PublicKeyCredentialCreationOptions(user.getNickname(), user.getEmail(), rpId, rpName);
 
