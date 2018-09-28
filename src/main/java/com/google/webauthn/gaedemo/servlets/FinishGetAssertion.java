@@ -31,7 +31,7 @@ import com.google.webauthn.gaedemo.server.Server;
 import com.google.webauthn.gaedemo.server.U2fServer;
 import com.google.webauthn.gaedemo.storage.Credential;
 
-import mediautil.gen.Log;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
