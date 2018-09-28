@@ -132,10 +132,10 @@ public class FinishGetAssertion extends HttpServlet {
     response.setContentType("application/json");
     String handle = DatatypeConverter.printHexBinary(savedCredential.getCredential().rawId);
     PublicKeyCredentialResponse rsp =
-        new PublicKeyCredentialResponse(true, "Successful assertion", handle);
+        new PublicKeyCredentialResponse(true, "Successful assertion", handle, "http://www.google.com/?code=123");
     Log.info("FINISH ASSERTION");
     Log.info(rsp.toJson());
-    int k = 9/0;
+    
     response.getWriter().println(rsp.toJson());
     
   }

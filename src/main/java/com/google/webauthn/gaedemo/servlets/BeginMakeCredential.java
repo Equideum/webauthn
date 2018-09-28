@@ -68,6 +68,7 @@ public class BeginMakeCredential extends HttpServlet {
 
     String rpName  = "webauthn-demo";
     String rpId = "poc-node-1.fhirblocks.io";
+    //String rpId = "localhost";
     
     PublicKeyCredentialCreationOptions options =
         new PublicKeyCredentialCreationOptions(user.getNickname(), user.getEmail(), rpId, rpName);

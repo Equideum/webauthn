@@ -124,7 +124,7 @@ function fetchCredentials() {
 
 function removeCredential(id) {
   return () => {
-    _fetch('/RemoveCredential', {
+    _fetch('/wan/RemoveCredential', {
       credentialId : id
     }).then(() => {
       fetchCredentials();
@@ -304,7 +304,7 @@ function getAssertion() {
       userHandle:         binToStr(_response.userHandle)
     };
 
-    return _fetch('/FinishGetAssertion', {
+    return _fetch('/wan/FinishGetAssertion', {
       data: JSON.stringify(publicKeyCredential),
       session: _parameters.session.id
     });
@@ -326,6 +326,9 @@ function getAssertion() {
         });
       }
     }
+    // now redirect to app
+    window.location.href = result.redirectUri;
+    
   }).catch(err => {
     hide('#active');
     console.log(err.toString());

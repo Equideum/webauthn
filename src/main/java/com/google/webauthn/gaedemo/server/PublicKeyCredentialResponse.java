@@ -20,16 +20,18 @@ public class PublicKeyCredentialResponse {
   protected boolean success;
   protected String message;
   protected String handle;
-
+  protected String redirectUri;
+  
   public PublicKeyCredentialResponse(boolean success, String message) {
     this.success = success;
     this.message = message;
   }
 
-  public PublicKeyCredentialResponse(boolean success, String message, String handle) {
+  public PublicKeyCredentialResponse(boolean success, String message, String handle, String redirectUri) {
     this.success = success;
     this.message = message;
     this.handle = handle;
+    this.redirectUri=redirectUri;
   }
 
   public String toJson() {
