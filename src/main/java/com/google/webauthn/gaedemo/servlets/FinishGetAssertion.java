@@ -28,7 +28,10 @@ import com.google.webauthn.gaedemo.server.AndroidSafetyNetServer;
 import com.google.webauthn.gaedemo.server.PackedServer;
 import com.google.webauthn.gaedemo.server.PublicKeyCredentialResponse;
 import com.google.webauthn.gaedemo.server.Server;
+import com.google.webauthn.gaedemo.server.U2fServer;
 import com.google.webauthn.gaedemo.storage.Credential;
+
+import mediautil.gen.Log;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,11 +40,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 
 public class FinishGetAssertion extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private final UserService userService = UserServiceFactory.getUserService();
+  
+  private static final Logger Log = Logger.getLogger(FinishGetAssertion.class.getName());
 
 
   public FinishGetAssertion() {
@@ -127,6 +133,9 @@ public class FinishGetAssertion extends HttpServlet {
     String handle = DatatypeConverter.printHexBinary(savedCredential.getCredential().rawId);
     PublicKeyCredentialResponse rsp =
         new PublicKeyCredentialResponse(true, "Successful assertion", handle);
+    Log.info("FINISH ASSERTION");
+    Log.info(rsp.toJson());
     response.getWriter().println(rsp.toJson());
+    
   }
 }

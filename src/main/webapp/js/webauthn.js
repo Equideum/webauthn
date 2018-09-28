@@ -361,11 +361,7 @@ window.addEventListener('load', () => {
   onClick('#credential-button', addCredential);
   onClick('#authenticate-button', getAssertion);
 
-if (PublicKeyCredential == null) {
-alert ("null PK");
-} else {
-alert("non null");
-}
+
 
   try {
     eval(window.PublicKeyCredential);
