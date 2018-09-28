@@ -135,6 +135,7 @@ public class FinishGetAssertion extends HttpServlet {
         new PublicKeyCredentialResponse(true, "Successful assertion", handle);
     Log.info("FINISH ASSERTION");
     Log.info(rsp.toJson());
+    int k = 9/0;
     response.getWriter().println(rsp.toJson());
     
   }
