@@ -39,7 +39,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
 
+import org.fhirblocks.core.model.csi.CSI;
+import org.fhirblocks.merlot.authtools.AuthorizationException;
+import org.fhirblocks.merlot.authtools.FhirBlocksAuthorization;
+import org.fhirblocks.merlot.authtools.model.ClientAuthorization;
+import org.fhirblocks.merlot.blockchain.exceptions.CsiException;
+import org.fhirblocks.merlot.blockchain.handler.CsiHandler;
+
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 
@@ -131,8 +140,47 @@ public class FinishGetAssertion extends HttpServlet {
 
     response.setContentType("application/json");
     String handle = DatatypeConverter.printHexBinary(savedCredential.getCredential().rawId);
+    
+    /*
+     * MAKE AN AUTH CODE
+     */
+    FhirBlocksAuthorization fba = new FhirBlocksAuthorization();
+    ClientAuthorization ca = new ClientAuthorization();
+    
+    CsiHandler ch = new CsiHandler();
+    CSI csi;
+	try {
+		csi = ch.getCSIByUserName(currentUser);
+		ca.setClientId(csi.getClient_id());
+	} catch (CsiException ex) {
+		ex.printStackTrace();
+	}
+
+    String audience = "";
+    String redirectUri = "https://poc-node-1.fhirblocks.io/web/";
+    String state = UUID.randomUUID().toString();
+    String scope = "user/patient.read consent.read provenance.read";
+    String responseType = "code";
+    String organizationCsiGuid = "org-guid";
+    
+    ca.setAudience(audience);
+    ca.setOrganizationCsiGuid(organizationCsiGuid);
+    ca.setRedirectUri(redirectUri);
+    ca.setResponseType(responseType);
+    ca.setScope(scope);
+    ca.setState(state);
+    
+    try {
+		ca = fba.createAuthorizationCode(ca);
+	} catch (AuthorizationException ex) {
+		Log.info("error in auth code creation");
+		ex.printStackTrace();
+	}
+    
+    String codeToSend = "?code="+ca.getCode();
+    codeToSend = URLEncoder.encode(codeToSend, "UTF-8");
     PublicKeyCredentialResponse rsp =
-        new PublicKeyCredentialResponse(true, "Successful assertion", handle, "http://www.google.com/?code=123");
+        new PublicKeyCredentialResponse(true, "Successful assertion", handle, ca.getRedirectUri()+codeToSend);
     Log.info("FINISH ASSERTION");
     Log.info(rsp.toJson());
     

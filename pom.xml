@@ -26,6 +26,19 @@
   <!-- [END set_versions] -->
 
   <dependencies>
+    <dependency>
+      <groupId>org.fhirblocks</groupId>
+      <artifactId>blockchain</artifactId>
+      <version>3.3.0</version>
+    </dependency>
+    
+  	<dependency>
+      <groupId>org.fhirblocks</groupId>
+      <artifactId>auth-tools</artifactId>
+      <version>3.3.0</version>
+    </dependency>
+    
+    
     <!-- Compile/runtime dependencies -->
     <dependency>
       <groupId>com.google.endpoints</groupId>

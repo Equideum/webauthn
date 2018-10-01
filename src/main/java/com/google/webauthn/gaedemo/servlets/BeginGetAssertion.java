@@ -49,8 +49,8 @@ public class BeginGetAssertion extends HttpServlet {
 	   
     String currentUser = userService.getCurrentUser().getEmail();
     String rpId = Iterables.get(Splitter.on(':').split(request.getHeader("Host")), 0);
-    rpId = "poc-node-1.fhirblocks.io";
-    //rpId = "localhost";
+    //rpId = "poc-node-1.fhirblocks.io";
+    rpId = "localhost";
     
     // String rpId = (request.isSecure() ? "https://" : "http://") + request.getHeader("Host");
     PublicKeyCredentialRequestOptions assertion = new PublicKeyCredentialRequestOptions(rpId);

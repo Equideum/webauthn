@@ -32,10 +32,19 @@ import com.google.webauthn.gaedemo.server.PublicKeyCredentialResponse;
 import com.google.webauthn.gaedemo.server.U2fServer;
 import com.google.webauthn.gaedemo.storage.Credential;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.UUID;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.fhirblocks.core.model.csi.CSI;
+import org.fhirblocks.core.model.csi.JWK;
+import org.fhirblocks.core.model.csi.JWKS;
+import org.fhirblocks.merlot.blockchain.exceptions.CsiException;
+import org.fhirblocks.merlot.blockchain.handler.CsiHandler;
 
 public class FinishMakeCredential extends HttpServlet {
 
@@ -118,6 +127,34 @@ public class FinishMakeCredential extends HttpServlet {
     PublicKeyCredentialResponse rsp =
         new PublicKeyCredentialResponse(true, "Successfully created credential");
 
+    /*
+     * MAKE A CSI
+     * 
+     */
+    CsiHandler ch = new CsiHandler();
+    CSI csi = new CSI();
+    csi.setClient_id(UUID.randomUUID().toString());
+    csi.setScope("user/patient.read consent.read provenance.read");
+    /*
+     * JWKS jwks = new JWKS();
+    
+    JWK jwk = new JWK();
+    LinkedList<JWK> keyList = new LinkedList<JWK>();
+    keyList.add(jwk);
+    jwks.setKeys(keyList);
+    jwks.setZ("");
+    csi.setJwks(jwks);
+    
+    */
+    LinkedList<String> contacts = new LinkedList<String>();
+    contacts.add(currentUser);
+    csi.setContacts(contacts);
+    try {
+		ch.createCsi(csi);
+	} catch (CsiException ex) {
+		ex.printStackTrace();
+	}
+    
     response.setContentType("application/json");
     response.getWriter().println(rsp.toJson());
   }
