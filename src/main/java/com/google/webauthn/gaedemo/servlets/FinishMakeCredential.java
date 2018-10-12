@@ -41,8 +41,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.fhirblocks.core.model.csi.CSI;
-import org.fhirblocks.core.model.csi.JWK;
-import org.fhirblocks.core.model.csi.JWKS;
+import org.fhirblocks.core.model.keys.JWK;
+import org.fhirblocks.core.model.keys.JWKS;
 import org.fhirblocks.merlot.blockchain.exceptions.CsiException;
 import org.fhirblocks.merlot.blockchain.handler.CsiHandler;
 
@@ -133,8 +133,12 @@ public class FinishMakeCredential extends HttpServlet {
      */
     CsiHandler ch = new CsiHandler();
     CSI csi = new CSI();
-    csi.setClient_id(UUID.randomUUID().toString());
-    csi.setScope("user/patient.read consent.read provenance.read");
+    csi.setClientId(UUID.randomUUID().toString());
+    LinkedList<String> scope = new LinkedList<String>();
+    scope.add("user/patient.read");
+    scope.add("consent.read");
+    scope.add("provenance.read");
+    csi.setScope(scope);
     /*
      * JWKS jwks = new JWKS();
     

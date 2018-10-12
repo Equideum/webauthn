@@ -41,7 +41,7 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.fhirblocks.core.model.csi.CSI;
 import org.fhirblocks.merlot.authtools.AuthorizationException;
-import org.fhirblocks.merlot.authtools.FhirBlocksAuthorization;
+import org.fhirblocks.merlot.authtools.FhirBlocksAuthorizationEngine;
 import org.fhirblocks.merlot.authtools.model.ClientAuthorization;
 import org.fhirblocks.merlot.blockchain.exceptions.CsiException;
 import org.fhirblocks.merlot.blockchain.handler.CsiHandler;
@@ -144,14 +144,14 @@ public class FinishGetAssertion extends HttpServlet {
     /*
      * MAKE AN AUTH CODE
      */
-    FhirBlocksAuthorization fba = new FhirBlocksAuthorization();
+    FhirBlocksAuthorizationEngine fba = new FhirBlocksAuthorizationEngine();
     ClientAuthorization ca = new ClientAuthorization();
     
     CsiHandler ch = new CsiHandler();
     CSI csi;
 	try {
 		csi = ch.getCSIByUserName(currentUser);
-		ca.setClientId(csi.getClient_id());
+		ca.setClientId(csi.getClientId());
 	} catch (CsiException ex) {
 		ex.printStackTrace();
 	}
