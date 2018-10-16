@@ -212,7 +212,7 @@ public class FinishGetAssertion extends HttpServlet {
     		uri = ca.getRedirectUri()+codeToSend;
     } else { // send bad cases to google hehe
     		Log.info("******************* BLOCK CHAIN ERROR ************");
-    		uri = "http://www.google.com";
+    		uri = "https://s3-us-west-2.amazonaws.com/fhirblocksdocs/warning.html";
     }
     Log.info("redirecting to "+uri);
     PublicKeyCredentialResponse rsp =
