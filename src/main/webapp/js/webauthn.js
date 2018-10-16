@@ -238,7 +238,8 @@ function addCredential() {
     console.log(parameters);
 
     if (parameters && parameters.success) {
-      showSuccessMsg(parameters.message);
+    		alert(parameters.message);
+      //showSuccessMsg(parameters.message);
       fetchCredentials();
     } else {
       throw 'Unexpected response received.';

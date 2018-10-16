@@ -124,9 +124,7 @@ public class FinishMakeCredential extends HttpServlet {
     Credential credential = new Credential(cred);
     credential.save(currentUser);
 
-    PublicKeyCredentialResponse rsp =
-        new PublicKeyCredentialResponse(true, "Successfully created credential");
-
+    
     /*
      * MAKE A CSI
      * 
@@ -135,29 +133,33 @@ public class FinishMakeCredential extends HttpServlet {
     CSI csi = new CSI();
     csi.setClientId(UUID.randomUUID().toString());
     LinkedList<String> scope = new LinkedList<String>();
-    scope.add("user/patient.read");
-    scope.add("consent.read");
-    scope.add("provenance.read");
+    scope.add("user/wanbogus.*");
     csi.setScope(scope);
-    /*
-     * JWKS jwks = new JWKS();
     
-    JWK jwk = new JWK();
-    LinkedList<JWK> keyList = new LinkedList<JWK>();
-    keyList.add(jwk);
-    jwks.setKeys(keyList);
+    
+    //  encode credential id into the jwks
+    JWKS jwks = new JWKS();
     jwks.setZ("");
+    jwks.setK(credential.getCredential().id);
     csi.setJwks(jwks);
+    LinkedList<JWK> keys = new LinkedList<JWK>();
+    jwks.setKeys(keys);
     
-    */
+    
+
     LinkedList<String> contacts = new LinkedList<String>();
     contacts.add(currentUser);
     csi.setContacts(contacts);
-    try {
-		ch.createCsi(csi);
+    PublicKeyCredentialResponse rsp =  new PublicKeyCredentialResponse(false, "failed to create credential - cause unknown");
+    	try {
+		ch.createCsi(csi, credential.getCredential().id);
+	    rsp = new PublicKeyCredentialResponse(true, "Successfully created credential.  CSIGuid is "+csi.getClientId()+ " inform the admin to complete authorization");
 	} catch (CsiException ex) {
 		ex.printStackTrace();
+		rsp = new PublicKeyCredentialResponse(false, "Credential creation failure. inform the admin "+ex.getMessage());
 	}
+    
+
     
     response.setContentType("application/json");
     response.getWriter().println(rsp.toJson());

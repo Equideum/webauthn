@@ -40,14 +40,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
 
 import org.fhirblocks.core.model.csi.CSI;
+import org.fhirblocks.core.model.csi.CsiModelException;
 import org.fhirblocks.merlot.authtools.AuthorizationException;
 import org.fhirblocks.merlot.authtools.FhirBlocksAuthorizationEngine;
 import org.fhirblocks.merlot.authtools.model.ClientAuthorization;
 import org.fhirblocks.merlot.blockchain.exceptions.CsiException;
+import org.fhirblocks.merlot.blockchain.exceptions.KeySpaceException;
 import org.fhirblocks.merlot.blockchain.handler.CsiHandler;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.LinkedList;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -148,39 +152,71 @@ public class FinishGetAssertion extends HttpServlet {
     ClientAuthorization ca = new ClientAuthorization();
     
     CsiHandler ch = new CsiHandler();
-    CSI csi;
+    CSI csi=null;
+    boolean blockChainError=false;
 	try {
-		csi = ch.getCSIByUserName(currentUser);
-		ca.setClientId(csi.getClientId());
-	} catch (CsiException ex) {
-		ex.printStackTrace();
+		Log.info("LOOKING for credential "+credentialIdRecoded);
+		//csi = ch.getCSIByUserName(currentUser);  // should be fetched via the credential id used
+		LinkedList<CSI> csis = ch.getCSIByAltKey(credentialIdRecoded);
+		if (csis.size()==0) {
+			Log.info("CSI not found!");
+			blockChainError=true;
+		}
+		if (csis.size()>1) {
+			Log.info("too many csi found with same credential id of "+credentialIdRecoded);
+			blockChainError=true;
+		}
+		if (csis.size()==1) {
+			csi = csis.get(0);
+		}
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (CsiModelException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (KeySpaceException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
 
-    String audience = "";
-    String redirectUri = "https://poc-node-1.fhirblocks.io/web/";
-    String state = UUID.randomUUID().toString();
-    String scope = "user/patient.read consent.read provenance.read";
-    String responseType = "code";
-    String organizationCsiGuid = "org-guid";
+	if (!blockChainError) {
+		String audience = "";
+		String redirectUri = "https://waa.fhirblocks.io/";
+		String state = UUID.randomUUID().toString();
+		String scope = "user/patient.read consent.read provenance.read";
+		String responseType = "code";
+		String organizationCsiGuid = "org-guid";
     
-    ca.setAudience(audience);
-    ca.setOrganizationCsiGuid(organizationCsiGuid);
-    ca.setRedirectUri(redirectUri);
-    ca.setResponseType(responseType);
-    ca.setScope(scope);
-    ca.setState(state);
-    
-    try {
-		ca = fba.createAuthorizationCode(ca);
-	} catch (AuthorizationException ex) {
-		Log.info("error in auth code creation");
-		ex.printStackTrace();
+    		ca.setAudience(audience);
+    		ca.setOrganizationCsiGuid(organizationCsiGuid);
+    		ca.setRedirectUri(redirectUri);
+    		ca.setResponseType(responseType);
+    		ca.setScope(scope);
+    		ca.setState(state);
+    		ca.setClientId(csi.getClientId());
+    	
+    		try {
+    			ca = fba.createAuthorizationCode(ca);
+    		} catch (AuthorizationException ex) {
+    			Log.info("error in auth code creation");
+    			ex.printStackTrace();
+    			blockChainError=true;
+		}
 	}
     
     String codeToSend = "?code="+ca.getCode();
     codeToSend = URLEncoder.encode(codeToSend, "UTF-8");
+    String uri = "";
+    if (!blockChainError) {
+    		uri = ca.getRedirectUri()+codeToSend;
+    } else { // send bad cases to google hehe
+    		Log.info("******************* BLOCK CHAIN ERROR ************");
+    		uri = "http://www.google.com";
+    }
+    Log.info("redirecting to "+uri);
     PublicKeyCredentialResponse rsp =
-        new PublicKeyCredentialResponse(true, "Successful assertion", handle, ca.getRedirectUri()+codeToSend);
+        new PublicKeyCredentialResponse(true, "Successful assertion", handle,uri);
     Log.info("FINISH ASSERTION");
     Log.info(rsp.toJson());
     
