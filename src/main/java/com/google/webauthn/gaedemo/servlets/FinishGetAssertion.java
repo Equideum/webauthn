@@ -182,7 +182,7 @@ public class FinishGetAssertion extends HttpServlet {
 
 	if (!blockChainError) {
 		String audience = "";
-		String redirectUri = "https://waa.fhirblocks.io/";
+		String redirectUri = "https://waa.fhirblocks.io:444/";
 		String state = UUID.randomUUID().toString();
 		String scope = "user/patient.read consent.read provenance.read";
 		String responseType = "code";
