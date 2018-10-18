@@ -186,7 +186,20 @@ public class FinishGetAssertion extends HttpServlet {
 		String state = UUID.randomUUID().toString();
 		String scope = "user/patient.read consent.read provenance.read";
 		String responseType = "code";
+		LinkedList<CSI> orgs;
 		String organizationCsiGuid = "org-guid";
+		try {
+			orgs = ch.getCSIByAltKey("Duke POC Test");
+			if (orgs.size()==0) {
+				blockChainError=true;
+			}
+			organizationCsiGuid = orgs.get(0).getClientId();
+		} catch (JSONException | CsiModelException | KeySpaceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
     
     		ca.setAudience(audience);
     		ca.setOrganizationCsiGuid(organizationCsiGuid);
