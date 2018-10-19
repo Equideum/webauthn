@@ -219,7 +219,7 @@ public class FinishGetAssertion extends HttpServlet {
 	}
     
     String codeToSend = "authn?code="+ca.getCode();
-    codeToSend = URLEncoder.encode(codeToSend, "UTF-8");
+    //codeToSend = URLEncoder.encode(codeToSend, "UTF-8");
     String uri = "";
     if (!blockChainError) {
     		uri = ca.getRedirectUri()+codeToSend;
