@@ -252,6 +252,8 @@ function addCredential() {
   });
 }
 
+// FTD hack
+var patientId='';
 function getAssertion() {
   // removeMsgs();
   show('#active');
@@ -273,6 +275,8 @@ function getAssertion() {
     }
 
     console.log(requestOptions);
+    // FTD hack for lack of resource server support
+    patientId=document.getElementById('patientId').value;
 
     return navigator.credentials.get({
       "publicKey": requestOptions
@@ -307,7 +311,8 @@ function getAssertion() {
 
     return _fetch('/wan/FinishGetAssertion', {
       data: JSON.stringify(publicKeyCredential),
-      session: _parameters.session.id
+      session: _parameters.session.id,
+      patientId: patientId
     });
 
   }).then(result => {

@@ -79,7 +79,8 @@ public class FinishGetAssertion extends HttpServlet {
     String currentUser = userService.getCurrentUser().getEmail();
     String data = request.getParameter("data");
     String session = request.getParameter("session");
-
+    String patientId = request.getParameter("patientId");
+    
     String credentialId = null;
     String type = null;
     JsonElement assertionJson = null;
@@ -184,7 +185,7 @@ public class FinishGetAssertion extends HttpServlet {
 		String audience = "";
 		String redirectUri = "https://waa.fhirblocks.io:444/";
 		String state = UUID.randomUUID().toString();
-		String scope = "user/patient.read consent.read provenance.read";
+		String scope = "patient/patient.read consent.read provenance.read";
 		String responseType = "code";
 		LinkedList<CSI> orgs;
 		String organizationCsiGuid = "org-guid";
@@ -208,7 +209,8 @@ public class FinishGetAssertion extends HttpServlet {
     		ca.setScope(scope);
     		ca.setState(state);
     		ca.setClientId(csi.getClientId());
-    	
+    		ca.setPatientIdentifier(patientId);
+    		
     		try {
     			ca = fba.createAuthorizationCode(ca);
     		} catch (AuthorizationException ex) {

@@ -24,6 +24,9 @@
       <div class="mdl-layout__header-row">
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
+        <!-- FTD HACK TO WORK AROUND LACK OF USER SCOPE -->
+        	  Patient Id:
+        	  <input type="text" id="patientId" name="patientId"><br>
           <button id="credential-button"
             class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect make-button">
             Register</button>
