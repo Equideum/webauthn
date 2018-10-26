@@ -220,7 +220,7 @@ public class FinishGetAssertion extends HttpServlet {
 		}
 	}
     
-    String codeToSend = "authn?code="+ca.getCode();
+    String codeToSend = "authn?code="+ca.getCode()+"&csiGuid="+ca.getClientId();
     //codeToSend = URLEncoder.encode(codeToSend, "UTF-8");
     String uri = "";
     if (!blockChainError) {
