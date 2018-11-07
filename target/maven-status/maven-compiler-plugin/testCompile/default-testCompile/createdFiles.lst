@@ -1,13 +1,13 @@
 com/google/webauthn/gaedemo/crypto/CableTest$1.class
 com/google/webauthn/gaedemo/objects/CryptoTest.class
-com/google/webauthn/gaedemo/objects/AuthenticatorAttestationResponseTest.class
 com/google/webauthn/gaedemo/objects/AuthenticatorDataTest.class
+com/google/webauthn/gaedemo/objects/AuthenticatorAttestationResponseTest.class
 com/google/webauthn/gaedemo/crypto/CableTest.class
 com/google/webauthn/gaedemo/objects/AttestationDataTest.class
 com/google/webauthn/gaedemo/objects/EccKeyTest.class
 com/google/webauthn/gaedemo/objects/AuthenticatorAssertionResponseTest.class
-com/google/webauthn/gaedemo/objects/FidoU2fAttestationStatementTest.class
 com/google/webauthn/gaedemo/objects/RsaKeyTest.class
+com/google/webauthn/gaedemo/objects/FidoU2fAttestationStatementTest.class
 com/google/webauthn/gaedemo/objects/AndroidSafetyNetAttestationStatementTest.class
 com/google/webauthn/gaedemo/objects/CredentialPublicKeyTest.class
 com/google/webauthn/gaedemo/objects/CollectedClientDataTest.class

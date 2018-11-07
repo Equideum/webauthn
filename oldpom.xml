@@ -187,7 +187,7 @@
         </executions>
       </plugin>
       <!--- FTD change -->
-      <!--
+      
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
@@ -202,7 +202,6 @@
           </execution>
         </executions>
       </plugin>
-      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

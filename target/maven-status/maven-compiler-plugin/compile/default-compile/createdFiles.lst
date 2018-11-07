@@ -18,8 +18,8 @@ com/google/webauthn/gaedemo/server/U2fServer.class
 com/google/webauthn/gaedemo/exceptions/ResponseException.class
 com/google/webauthn/gaedemo/objects/AuthenticatorAttachment.class
 com/google/webauthn/gaedemo/server/OfyHelper$1.class
-com/google/webauthn/gaedemo/objects/AttestationObject.class
 com/google/webauthn/gaedemo/objects/AuthenticatorAttestationResponse$AttestationResponseJson.class
+com/google/webauthn/gaedemo/objects/AttestationObject.class
 com/google/webauthn/gaedemo/crypto/Crypto.class
 com/google/webauthn/gaedemo/storage/Attachment.class
 com/google/webauthn/gaedemo/servlets/RegisteredKeys.class
@@ -27,12 +27,12 @@ com/google/webauthn/gaedemo/servlets/FinishMakeCredential.class
 com/google/webauthn/gaedemo/crypto/OfflineVerify$AttestationStatement.class
 com/google/webauthn/gaedemo/server/AndroidSafetyNetServer.class
 com/google/webauthn/gaedemo/objects/EccKey.class
-com/google/webauthn/gaedemo/objects/AttestationData.class
 com/google/webauthn/gaedemo/objects/AttestationStatementEnum.class
+com/google/webauthn/gaedemo/objects/AttestationData.class
 com/google/webauthn/gaedemo/servlets/Cable.class
 com/google/webauthn/gaedemo/objects/CredentialPublicKey.class
-com/google/webauthn/gaedemo/objects/AuthenticationExtensions.class
 com/google/webauthn/gaedemo/objects/AuthenticatorAssertionResponse.class
+com/google/webauthn/gaedemo/objects/AuthenticationExtensions.class
 com/google/webauthn/gaedemo/objects/AttestationConveyancePreference.class
 com/google/webauthn/gaedemo/objects/AuthenticatorResponse.class
 com/google/webauthn/gaedemo/objects/Algorithm.class
@@ -63,8 +63,8 @@ com/google/webauthn/gaedemo/objects/CablePairingData.class
 com/google/webauthn/gaedemo/objects/PublicKeyCredential.class
 com/google/webauthn/gaedemo/server/PackedServer.class
 com/google/webauthn/gaedemo/storage/Authenticator.class
-com/google/webauthn/gaedemo/objects/AuthenticatorData.class
 com/google/webauthn/gaedemo/objects/AuthenticatorTransport.class
+com/google/webauthn/gaedemo/objects/AuthenticatorData.class
 com/google/webauthn/gaedemo/endpoints/Fido2RequestHandler$1.class
 com/google/webauthn/gaedemo/servlets/GetSession.class
 com/google/webauthn/gaedemo/objects/AuthenticatorAssertionResponse$AssertionResponseJson.class

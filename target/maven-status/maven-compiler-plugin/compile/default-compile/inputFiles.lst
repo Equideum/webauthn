@@ -14,15 +14,15 @@
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/servlets/Login.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/storage/User.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/PackedAttestationStatement.java
-/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/server/U2fServer.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/servlets/BeginGetAssertion.java
-/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/exceptions/WebAuthnException.java
+/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/server/U2fServer.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/Algorithm.java
+/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/exceptions/WebAuthnException.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/PublicKeyCredentialUserEntity.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/PublicKeyCredentialCreationOptions.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/AttestationConveyancePreference.java
-/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/AuthenticatorData.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/PublicKeyCredentialRpEntity.java
+/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/AuthenticatorData.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/crypto/OfflineVerify.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/CablePairingData.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/storage/Credential.java
@@ -37,8 +37,8 @@
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/endpoints/Constants.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/PublicKeyCredential.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/AuthenticatorAttestationResponse.java
-/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/exceptions/ResponseException.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/AuthenticatorResponse.java
+/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/exceptions/ResponseException.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/endpoints/Fido2RequestHandler.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/servlets/SaveCredential.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/servlets/FinishMakeCredential.java
@@ -53,8 +53,8 @@
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/server/PublicKeyCredentialResponse.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/PublicKeyCredentialDescriptor.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/CredentialPublicKey.java
-/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/crypto/AlgorithmIdentifierMapper.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/crypto/Cable.java
+/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/crypto/AlgorithmIdentifierMapper.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/AttestationStatement.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/servlets/RemoveCredential.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/servlets/CreateSession.java
@@ -65,6 +65,6 @@
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/PublicKeyCredentialType.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/storage/Attachment.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/AuthenticatorSelectionCriteria.java
-/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/AuthenticatorAssertionResponse.java
-/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/CollectedClientData.java
 /Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/EccKey.java
+/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/CollectedClientData.java
+/Users/tomdanner/fb/webauthn/src/main/java/com/google/webauthn/gaedemo/objects/AuthenticatorAssertionResponse.java
