@@ -41,12 +41,15 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.fhirblocks.core.model.csi.CSI;
 import org.fhirblocks.core.model.csi.CsiModelException;
+import org.fhirblocks.core.model.organizations.Organization;
 import org.fhirblocks.merlot.authtools.AuthorizationException;
 import org.fhirblocks.merlot.authtools.FhirBlocksAuthorizationEngine;
 import org.fhirblocks.merlot.authtools.model.ClientAuthorization;
 import org.fhirblocks.merlot.blockchain.exceptions.CsiException;
 import org.fhirblocks.merlot.blockchain.exceptions.KeySpaceException;
+import org.fhirblocks.merlot.blockchain.exceptions.OrganizationException;
 import org.fhirblocks.merlot.blockchain.handler.CsiHandler;
+import org.fhirblocks.merlot.blockchain.handler.OrganizationHandler;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -187,23 +190,21 @@ public class FinishGetAssertion extends HttpServlet {
 		String state = UUID.randomUUID().toString();
 		String scope = "patient/patient.read consent.read provenance.read";
 		String responseType = "code";
-		LinkedList<CSI> orgs;
-		String organizationCsiGuid = "org-guid";
+		OrganizationHandler oh  = new OrganizationHandler();
+		String orgGuid="";
 		try {
-			orgs = ch.getCSIByAltKey("Duke POC Test");
-			if (orgs.size()==0) {
-				blockChainError=true;
-			}
-			organizationCsiGuid = orgs.get(0).getClientId();
-		} catch (JSONException | CsiModelException | KeySpaceException e) {
+			Organization org = oh.getOrganizationByName("Duke POC Test");
+			orgGuid = org.getOrganizationId();
+		} catch (OrganizationException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
+		Log.info("org guid is "+orgGuid);
 		
 		
     
     		ca.setAudience(audience);
-    		ca.setOrganizationCsiGuid(organizationCsiGuid);
+    		ca.setOrganizationCsiGuid(orgGuid);
     		ca.setRedirectUri(redirectUri);
     		ca.setResponseType(responseType);
     		ca.setScope(scope);
