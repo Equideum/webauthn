@@ -184,6 +184,12 @@ public class FinishGetAssertion extends HttpServlet {
 		e.printStackTrace();
 	}
 
+	String orgName="";
+	if (patientId.equals("22782")) {
+		orgName="Duke POC Test";
+	} else {
+		orgName="Duke RS Test";
+  	}
 	if (!blockChainError) {
 		String audience = "";
 		String redirectUri = "https://waa.fhirblocks.io:444/";
@@ -193,7 +199,7 @@ public class FinishGetAssertion extends HttpServlet {
 		OrganizationHandler oh  = new OrganizationHandler();
 		String orgGuid="";
 		try {
-			Organization org = oh.getOrganizationByName("Duke POC Test");
+			Organization org = oh.getOrganizationByName(orgName);
 			orgGuid = org.getOrganizationId();
 		} catch (OrganizationException e1) {
 			// TODO Auto-generated catch block
