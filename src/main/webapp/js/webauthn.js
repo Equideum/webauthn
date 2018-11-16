@@ -254,6 +254,7 @@ function addCredential() {
 
 // FTD hack
 var patientId='';
+var csp='';
 function getAssertion() {
   // removeMsgs();
   show('#active');
@@ -277,6 +278,7 @@ function getAssertion() {
     console.log(requestOptions);
     // FTD hack for lack of resource server support
     patientId=document.getElementById('patientId').value;
+    csp=document.getElementById('csp').value;
 
     return navigator.credentials.get({
       "publicKey": requestOptions
@@ -312,7 +314,8 @@ function getAssertion() {
     return _fetch('/wan/FinishGetAssertion', {
       data: JSON.stringify(publicKeyCredential),
       session: _parameters.session.id,
-      patientId: patientId
+      patientId: patientId,
+      csp: csp
     });
 
   }).then(result => {

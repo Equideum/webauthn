@@ -83,6 +83,7 @@ public class FinishGetAssertion extends HttpServlet {
     String data = request.getParameter("data");
     String session = request.getParameter("session");
     String patientId = request.getParameter("patientId");
+    String csp=request.getParameter("csp");
     
     String credentialId = null;
     String type = null;
@@ -192,7 +193,12 @@ public class FinishGetAssertion extends HttpServlet {
   	}
 	if (!blockChainError) {
 		String audience = "";
-		String redirectUri = "https://waa.fhirblocks.io:444/";
+		String redirectUri;
+		if (csp.equals("x")) {
+			redirectUri="https://csp.fhirblocks.io:444";
+		} else {
+			redirectUri = "https://waa.fhirblocks.io:444/";
+		} 
 		String state = UUID.randomUUID().toString();
 		String scope = "patient/patient.read consent.read provenance.read";
 		String responseType = "code";
